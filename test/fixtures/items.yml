@@ -1,0 +1,17 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: Example item one
+  complete: false
+  list: one
+
+two:
+  name: Example item two
+  complete: true
+  list: one
+
+three:
+  name: Example item three
+  complete: false
+  list: two
+
