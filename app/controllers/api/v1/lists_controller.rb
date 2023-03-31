@@ -1,28 +1,26 @@
 module Api
   module V1
     class ListsController < BaseController
-      before_action :set_user, only: [:index, :create]
       before_action :set_list, only: [:update, :destroy]
 
-      # GET /users/:user_id/lists
+      # GET /api/v1/lists
       def index
-        @lists = @user.lists
-        render json: @lists
+        render json: @current_user.lists
       end
 
-      # POST /users/:user_id/lists
+      # POST /api/v1/lists
       def create
         @list = List.new(list_params)
 
         if @list.save
-          UserList.create(user: @user, list: @list)
+          UserList.create(user: @current_user, list: @list)
           render json: @list, status: :created
         else
           render json: @list.errors, status: :unprocessable_entity
         end
       end
 
-      # PATCH/PUT /lists/:id
+      # PATCH/PUT /api/v1/lists/:id
       def update
         if @list.update(list_params)
           render json: @list
@@ -31,7 +29,7 @@ module Api
         end
       end
 
-      # DELETE /lists/:id
+      # DELETE /api/v1/lists/:id
       def destroy
         @list.destroy
         head :no_content
@@ -39,12 +37,8 @@ module Api
 
       private
 
-      def set_user
-        @user = User.find(params[:user_id])
-      end
-
       def set_list
-        @list = List.find(params[:id])
+        @list = @current_user.lists.find(params[:id])
       end
 
       def list_params

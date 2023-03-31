@@ -12,6 +12,5 @@ two:
 
 three:
   name: Example item three
-  complete: false
+  complete: true
   list: two
-
