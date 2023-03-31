@@ -1,6 +1,14 @@
 require "test_helper"
 
 class ItemTest < ActiveSupport::TestCase
+  def setup
+    @item = Item.new(name: "Example item", complete: false, list: lists(:one))
+  end
+
+  test "should be valid" do
+    assert @item.valid?
+  end
+
   test "should not save item without name" do
     item = Item.new(complete: false, list: lists(:one))
     assert_not item.save, "Saved the item without a name"
