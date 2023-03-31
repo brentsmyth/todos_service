@@ -16,7 +16,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_30_235104) do
 
   create_table "items", force: :cascade do |t|
     t.string "name"
-    t.boolean "complete"
+    t.boolean "complete", default: false
     t.bigint "list_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
