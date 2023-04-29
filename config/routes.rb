@@ -4,7 +4,8 @@ Rails.application.routes.draw do
   # Defines the root path route ("/")
   # root "articles#index"
 
-  match 'auth/:provider/callback', to: 'sessions#create', via: [:get, :post]
+  match 'auth/:provider/callback', to: 'authentication#google_oauth2_callback', via: [:get]
+  get 'auth/google_oauth2_redirect', to: 'authentication#google_oauth2_redirect'
 
   namespace :api do
     namespace :v1 do
