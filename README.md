@@ -19,7 +19,7 @@ This section outlines the API endpoints for the Todo Service.
 
 All requests to the API must include a valid JWT token in the `Authorization` header. The token is obtained by authenticating with Google OAuth. A user will be created if it doesn't already exist, and the JWT token will contain the `user_id`.
 
-You can get a JWT for the production app by visiting: https://todos-service.herokuapp.com/auth/google_oauth2/redirect
+You can get a JWT for the production app by visiting: https://todos-service.herokuapp.com/auth/google_oauth2_redirect
 
 ### Endpoints
 
