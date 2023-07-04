@@ -8,12 +8,16 @@ module Api
 
       def authenticate_user!
         token = request.headers['Authorization']&.split(' ')&.last
-        if token
-          decoded_token = JWT.decode(token, ENV["JWT_SECRET"], true, { algorithm: 'HS256' })[0]
-          @current_user = User.find(decoded_token['user_id'])
-        end
+        begin
+          if token
+            decoded_token = JWT.decode(token, ENV["JWT_SECRET"], true, { algorithm: 'HS256' })[0]
+            @current_user = User.find(decoded_token['user_id'])
+          end
 
-        head :unauthorized unless @current_user
+          head :unauthorized unless @current_user
+        rescue JWT::ExpiredSignature
+          head :forbidden
+        end
       end
     end
   end
